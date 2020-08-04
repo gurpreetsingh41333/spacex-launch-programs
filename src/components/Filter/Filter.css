@@ -1,0 +1,43 @@
+.filter-box {
+  background-color: rgb(253, 249, 244);
+  border: 1px solid #dfe3e6;
+  border-radius: 2px;
+  width: 80%;
+  padding: 30px;
+  margin: 10px;
+}
+
+.filter-box-container {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  align-items: center;
+}
+
+.filter-content {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 200px;
+  justify-content: space-between;
+}
+
+.button-container {
+  width: 100px;
+  display: flex;
+}
+
+.button-box {
+  color: #000000;
+  background-color: #b7e4bf;
+  font-weight: 700;
+  text-align: center;
+  border: 2px solid #b7e4bf;
+  border-radius: 5px;
+  width: 50px;
+  margin: 20px auto;
+}
+
+.horizontal-rule {
+  width: 200px;
+}
