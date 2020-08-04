@@ -1,0 +1,44 @@
+.launch-list {
+  background-color: rgb(253, 249, 244);
+  border: 1px solid #dfe3e6;
+  border-radius: 2px;
+  padding: 30px;
+  margin: 10px;
+}
+
+.list-container {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+}
+
+.detail-section {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.image-body {
+  background-color: #dfe3e6;
+  border-radius: 2px;
+  display: flex;
+  justify-content: center;
+}
+
+.image {
+  width: 100px;
+  height: 100px;
+  align-self: center;
+}
+
+.image-title {
+  font-weight: 700;
+}
+
+.label-section {
+  font-weight: 700;
+  font-size: 0.8rem;
+}
+
+ul {
+  margin-left: 20px;
+}

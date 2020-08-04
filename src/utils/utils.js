@@ -7,3 +7,9 @@ export const filterYears = () => {
 };
 
 export const booleanText = ['True', 'False'];
+
+export const BASE_URL = 'https://api.spaceXdata.com/v3/launches';
+
+export const ERROR_MSG = {
+  NO_RECORD: 'No records!',
+};
