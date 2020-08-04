@@ -41,3 +41,7 @@
 .horizontal-rule {
   width: 200px;
 }
+
+.active {
+  background-color: #278c39 !important;
+}
