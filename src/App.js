@@ -7,6 +7,7 @@ import Filter from './components/Filter/Filter';
 import ApiCall from './middleware/ApiCall';
 import { BASE_URL, ERROR_MSG } from './utils/utils';
 import LaunchDetails from './components/LaunchDetails/LaunchDetails';
+import Footer from './components/Footer/Footer';
 
 export const App = () => {
   const [launchList, setLaunchList] = useState([]);
@@ -69,6 +70,7 @@ export const App = () => {
           )}
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

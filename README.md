@@ -7,6 +7,10 @@ List of all launches by SpaceX program.
 - react-ssr
 - pre-build and pre-commit code checking via eslint
 
+## Lighthouse Scores
+
+![Lighthouse Scores](/images/lighthouse-scores.png)
+
 ## Getting Started
 
 **1. Clone the repository to your local machine by running:**
