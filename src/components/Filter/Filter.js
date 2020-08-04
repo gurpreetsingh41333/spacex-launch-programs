@@ -12,8 +12,8 @@ export const Filter = () => {
         <hr className="horizontal-rule" />
         <div className="filter-content">
           {filterYears().map(year => (
-            <div className="button-container">
-              <button key={year} className="button-box" type="button">
+            <div className="button-container" key={year}>
+              <button className="button-box" type="button">
                 {year}
               </button>
             </div>
@@ -25,8 +25,8 @@ export const Filter = () => {
         <hr className="horizontal-rule" />
         <div className="filter-content">
           {booleanText.map(text => (
-            <div className="button-container">
-              <button key={text} type="button" className="button-box">
+            <div className="button-container" key={text}>
+              <button type="button" className="button-box">
                 {text}
               </button>
             </div>
@@ -38,8 +38,8 @@ export const Filter = () => {
         <hr className="horizontal-rule" />
         <div className="filter-content">
           {booleanText.map(text => (
-            <div className="button-container">
-              <button key={text} type="button" className="button-box">
+            <div className="button-container" key={text}>
+              <button type="button" className="button-box">
                 {text}
               </button>
             </div>
