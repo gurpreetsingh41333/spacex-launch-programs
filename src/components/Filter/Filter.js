@@ -1,9 +1,11 @@
 import React from 'react';
+import PropTypes, { number, bool } from 'prop-types';
 
 import './Filter.css';
+
 import { filterYears, booleanText } from '../../utils/utils';
 
-export const Filter = () => {
+export const Filter = ({ getFilteredList, filterYear, isLaunchSuccess, isLandingSuccess }) => {
   return (
     <div className="filter-box">
       Filters
@@ -13,7 +15,12 @@ export const Filter = () => {
         <div className="filter-content">
           {filterYears().map(year => (
             <div className="button-container" key={year}>
-              <button className="button-box" type="button">
+              <button
+                className={`button-box ${filterYear === year && 'active'}`}
+                type="button"
+                onClick={() => {
+                  getFilteredList({ year, launch: isLaunchSuccess, landing: isLandingSuccess });
+                }}>
                 {year}
               </button>
             </div>
@@ -26,7 +33,18 @@ export const Filter = () => {
         <div className="filter-content">
           {booleanText.map(text => (
             <div className="button-container" key={text}>
-              <button type="button" className="button-box">
+              <button
+                type="button"
+                className={`button-box ${
+                  JSON.stringify(isLaunchSuccess).toUpperCase() === text.toUpperCase() && 'active'
+                }`}
+                onClick={() => {
+                  getFilteredList({
+                    year: filterYear,
+                    launch: text === 'True',
+                    landing: isLandingSuccess,
+                  });
+                }}>
                 {text}
               </button>
             </div>
@@ -39,7 +57,18 @@ export const Filter = () => {
         <div className="filter-content">
           {booleanText.map(text => (
             <div className="button-container" key={text}>
-              <button type="button" className="button-box">
+              <button
+                type="button"
+                className={`button-box ${
+                  JSON.stringify(isLandingSuccess).toUpperCase() === text.toUpperCase() && 'active'
+                }`}
+                onClick={() => {
+                  getFilteredList({
+                    year: filterYear,
+                    launch: isLaunchSuccess,
+                    landing: text === 'True',
+                  });
+                }}>
                 {text}
               </button>
             </div>
@@ -48,6 +77,13 @@ export const Filter = () => {
       </div>
     </div>
   );
+};
+
+Filter.propTypes = {
+  getFilteredList: PropTypes.func,
+  filterYear: PropTypes.oneOf([number, null]),
+  isLaunchSuccess: PropTypes.oneOf([bool, null]),
+  isLandingSuccess: PropTypes.oneOf([bool, null]),
 };
 
 export default Filter;

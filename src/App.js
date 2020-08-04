@@ -12,14 +12,17 @@ export const App = () => {
   const [launchList, setLaunchList] = useState([]);
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
+  const [filterYear, setFilterYear] = useState(null);
+  const [isLaunchSuccess, setIsLaunchSuccess] = useState(null);
+  const [isLandingSuccess, setIsLandingSuccess] = useState(null);
 
-  const renderPosts = async () => {
+  const renderPosts = async url => {
     setLoading(true);
     let launchList = [];
     let errorMsg = '';
     try {
-      const fetchInitialData = await ApiCall.getCall(`${BASE_URL}?limit=100`);
-      if (fetchInitialData?.status === 200 && fetchInitialData?.data) {
+      const fetchInitialData = await ApiCall.getCall(url);
+      if (fetchInitialData?.status === 200 && fetchInitialData?.data.length > 0) {
         launchList = fetchInitialData.data;
       } else errorMsg = ERROR_MSG.NO_RECORD;
     } catch (error) {
@@ -31,19 +34,35 @@ export const App = () => {
   };
 
   useEffect(() => {
-    renderPosts();
+    renderPosts(`${BASE_URL}?limit=100`);
   }, []);
+
+  const getFilteredList = async ({ year, launch, landing }) => {
+    setFilterYear(year);
+    setIsLaunchSuccess(launch);
+    setIsLandingSuccess(landing);
+    let url = `${BASE_URL}?limit=100`;
+    if (launch !== null) url += `&launch_success=${launch}`;
+    if (landing !== null) url += `&land_success=${landing}`;
+    if (year) url += `&launch_year=${year}`;
+    renderPosts(url);
+  };
 
   return (
     <div>
       <Header />
       <div className="main">
-        <Filter />
+        <Filter
+          getFilteredList={getFilteredList}
+          filterYear={filterYear}
+          isLaunchSuccess={isLaunchSuccess}
+          isLandingSuccess={isLandingSuccess}
+        />
         <div className="right-pane">
-          {errorMsg && <span>{errorMsg}</span>}
+          {!loading && errorMsg && <span>{errorMsg}</span>}
           {!loading ? (
             launchList.map(list => {
-              return <LaunchDetails list={list} />;
+              return <LaunchDetails list={list} isLandingSuccess={isLandingSuccess} />;
             })
           ) : (
             <span>Loading...</span>

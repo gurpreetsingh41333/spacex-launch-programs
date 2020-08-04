@@ -1,9 +1,9 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import PropTypes, { bool } from 'prop-types';
 
 import './LaunchDetails.css';
 
-export const LaunchDetails = ({ list }) => {
+export const LaunchDetails = ({ list, isLandingSuccess }) => {
   return (
     <div key={list.flight_number} className="launch-list">
       <div className="list-container">
@@ -41,7 +41,7 @@ export const LaunchDetails = ({ list }) => {
           <label htmlFor="launch_landing" className="label-section">
             Successful Landing:{' '}
           </label>
-          {list.launch_landing}
+          {isLandingSuccess && JSON.stringify(isLandingSuccess)}
         </div>
       </div>
     </div>
@@ -60,6 +60,7 @@ LaunchDetails.propTypes = {
     launch_success: PropTypes.bool,
     launch_landing: PropTypes.bool,
   }),
+  isLandingSuccess: PropTypes.oneOf([bool, null]),
 };
 
 export default LaunchDetails;
