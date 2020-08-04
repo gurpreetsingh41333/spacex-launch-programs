@@ -10,7 +10,6 @@ List of all launches by SpaceX program.
 ## Lighthouse Scores
 
 ![Lighthouse Scores](/images/lighthouse-scores.png)
-Format: ![Alt Text](url)
 
 ## Getting Started
 
