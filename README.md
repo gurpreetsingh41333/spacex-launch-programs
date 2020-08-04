@@ -9,7 +9,11 @@ List of all launches by SpaceX program.
 
 ## Lighthouse Scores
 
-![Lighthouse Scores](/images/lighthouse-scores.png)
+- Mobile
+  ![Lighthouse Scores](/images/lighthouse-scores.png)
+
+- Desktop
+  ![Lighthouse Scores](/images/lighthouse-scores-desktop.png)
 
 ## Getting Started
 
