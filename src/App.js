@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Helmet } from 'react-helmet';
 
 import './App.css';
 
@@ -50,29 +51,46 @@ export const App = () => {
   };
 
   return (
-    <div>
-      <Header />
-      <div className="main">
-        <Filter
-          getFilteredList={getFilteredList}
-          filterYear={filterYear}
-          isLaunchSuccess={isLaunchSuccess}
-          isLandingSuccess={isLandingSuccess}
-        />
-        <div className="right-pane">
-          {!loading && errorMsg && <span>{errorMsg}</span>}
-          {!loading ? (
-            launchList.map(list => {
-              return <LaunchDetails list={list} isLandingSuccess={isLandingSuccess} />;
-            })
-          ) : (
-            <span>Loading...</span>
-          )}
+    <>
+      <Helmet key={Math.random()}>
+        <title>SpaceX</title>
+        <meta property="SSR:title" content="spacex-launch-programs" />
+        <meta name="description" content="spacex-launch-programs" />
+        <meta name="robots" content="index, follow" />
+        <link rel="canonical" href="https://warm-reaches-42627.herokuapp.com/" />
+      </Helmet>
+      <div>
+        <Header />
+        <div className="main">
+          <Filter
+            getFilteredList={getFilteredList}
+            filterYear={filterYear}
+            isLaunchSuccess={isLaunchSuccess}
+            isLandingSuccess={isLandingSuccess}
+          />
+          <div className="right-pane">
+            {!loading && errorMsg && <span>{errorMsg}</span>}
+            {!loading ? (
+              launchList.map(list => {
+                return (
+                  <LaunchDetails
+                    list={list}
+                    isLandingSuccess={isLandingSuccess}
+                    key={list.flight_number}
+                  />
+                );
+              })
+            ) : (
+              <span>Loading...</span>
+            )}
+          </div>
         </div>
+        <Footer />
       </div>
-      <Footer />
-    </div>
+    </>
   );
 };
 
-export default App;
+export default {
+  component: App,
+};

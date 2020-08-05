@@ -7,24 +7,36 @@
     "npm": "6.14.5"
   },
   "dependencies": {
+    "@babel/polyfill": "^7.10.4",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
     "axios": "^0.19.2",
+    "compression-webpack-plugin": "^4.0.0",
     "express": "^4.17.1",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-helmet": "^6.1.0",
+    "react-router-config": "^5.1.1",
+    "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
+    "uglifyjs-webpack-plugin": "^2.2.0",
+    "webpack": "^4.42.0",
+    "webpack-merge": "^4.2.2",
     "webpack-node-externals": "^1.7.2"
   },
   "scripts": {
-    "start": "node ./server-build/index.js",
+    "start": "node server-build/index.js",
     "prebuild": "eslint src/*.js --fix-dry-run",
-    "build": "react-scripts build",
-    "dev:build-server": "NODE_ENV=development & webpack --config webpack.server.js --mode=development -w",
-    "dev:start": "nodemon ./server-build/index.js",
-    "dev": "npm-run-all --parallel build dev:*"
+    "build": "rm -rf server-build && rm -rf build && webpack  --config webpack.server.js && webpack --config webpack.client.prod.js",
+    "heroku-postbuild": "npm install && npm run build",
+    "webpack-prod": "webpack -p --progress --config webpack.client.prod.js --mode production",
+    "dev": "npm run build-server && npm-run-all --parallel dev:*",
+    "build-server": "webpack --config webpack.server.js",
+    "dev:build-server": "webpack --config webpack.server.js --watch",
+    "dev:build-client": "webpack --config webpack.client.js --watch",
+    "dev:start": "nodemon --watch build --exec node server-build/index.js"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -62,12 +74,15 @@
     "eslint-plugin-react": "^7.20.5",
     "eslint-plugin-react-hooks": "^4.0.8",
     "husky": "^4.2.5",
+    "ignore-loader": "^0.1.2",
     "lint-staged": "^10.2.11",
     "mini-css-extract-plugin": "^0.8.0",
+    "node-sass": "^4.14.1",
     "nodemon": "^2.0.4",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.0.5",
-    "webpack": "^4.42.0",
+    "sass-loader": "^9.0.2",
+    "style-loader": "^1.2.1",
     "webpack-cli": "^3.3.12"
   },
   "babel": {

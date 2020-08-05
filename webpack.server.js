@@ -1,28 +1,23 @@
 const path = require('path');
-const nodeExternals = require('webpack-node-externals');
+const merge = require('webpack-merge');
+const webpackNodeExternals = require('webpack-node-externals');
+const baseConfig = require('./webpack.base.js');
 
-module.exports = {
-  entry: ['./server/index.js'],
-
+const config = {
   target: 'node',
-
-  externals: [nodeExternals()],
-
+  mode: 'production',
+  entry: './server/index.js',
+  externals: [webpackNodeExternals()],
   output: {
     path: path.resolve('server-build'),
     filename: 'index.js',
   },
-
   module: {
     rules: [
-      {
-        test: /\.js$/,
-        use: 'babel-loader',
-      },
-      {
-        test: /\.(scss|css)$/,
-        use: ['css-loader'],
-      },
+      { test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader' },
+      { test: /\.(scss|css)$/, loader: 'ignore-loader' },
     ],
   },
 };
+
+module.exports = merge(baseConfig, config);

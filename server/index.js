@@ -1,36 +1,44 @@
-import path from 'path';
-import fs from 'fs';
-
-import React from 'react';
+import '@babel/polyfill';
 import express from 'express';
-import ReactDOMServer from 'react-dom/server';
+import { matchRoutes } from 'react-router-config';
 
-import App from '../src/App';
+import Routes from '../src/Routes';
+import ServerRenderer from '../src/ServerRenderer';
 
-const PORT = process.env.PORT || 3005;
 const app = express();
 
-app.get('/', (req, res) => {
-  const app = ReactDOMServer.renderToString(<App />);
+const PORT = process.env.PORT || 3005;
 
-  const indexFile = path.resolve('./build/index.html');
-  fs.readFile(indexFile, 'utf8', (err, data) => {
-    if (err) {
-      // eslint-disable-next-line no-console
-      console.error('Something went wrong:', err);
-      return res.status(500).send('Something went wrong!');
+app.use(express.static('build'));
+
+app.get('*', (req, res) => {
+  const routes = matchRoutes(Routes, req.path);
+  const promises = routes
+    .map(({ route }) => {
+      return route.loadData ? route.loadData() : null;
+    })
+    .map(promise => {
+      if (promise) {
+        return new Promise(resolve => {
+          promise.then(resolve).catch(resolve);
+        });
+      }
+      return null;
+    });
+
+  Promise.all(promises).then(() => {
+    const context = {};
+    const content = ServerRenderer(req, context);
+
+    if (context.notFound) {
+      res.status(404);
     }
 
-    return res.send(data.replace('<div id="root"></div>', `<div id="root">${app}</div>`));
+    res.send(content);
   });
 });
 
-app.use(express.static('./build'));
-
-// eslint-disable-next-line no-console
-console.log(PORT);
-
 app.listen(PORT, () => {
   // eslint-disable-next-line no-console
-  console.log(`Server is listening on port ${PORT}`);
+  console.log(`Listening on port: ${PORT}`);
 });

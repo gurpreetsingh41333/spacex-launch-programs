@@ -1,11 +1,11 @@
 import React from 'react';
-import PropTypes, { bool } from 'prop-types';
+import PropTypes from 'prop-types';
 
 import './LaunchDetails.css';
 
 export const LaunchDetails = ({ list, isLandingSuccess }) => {
   return (
-    <div key={list.flight_number} className="launch-list">
+    <div className="launch-list">
       <div className="list-container">
         <div className="detail-section">
           <div className="image-body">
@@ -60,7 +60,7 @@ LaunchDetails.propTypes = {
     launch_success: PropTypes.bool,
     launch_landing: PropTypes.bool,
   }),
-  isLandingSuccess: PropTypes.oneOf([bool, null]),
+  isLandingSuccess: PropTypes.bool,
 };
 
 export default LaunchDetails;

@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes, { number, bool } from 'prop-types';
+import PropTypes from 'prop-types';
 
 import './Filter.css';
 
@@ -81,9 +81,9 @@ export const Filter = ({ getFilteredList, filterYear, isLaunchSuccess, isLanding
 
 Filter.propTypes = {
   getFilteredList: PropTypes.func,
-  filterYear: PropTypes.oneOf([number, null]),
-  isLaunchSuccess: PropTypes.oneOf([bool, null]),
-  isLandingSuccess: PropTypes.oneOf([bool, null]),
+  filterYear: PropTypes.number,
+  isLaunchSuccess: PropTypes.bool,
+  isLandingSuccess: PropTypes.bool,
 };
 
 export default Filter;
