@@ -15,6 +15,24 @@
   width: 85%;
 }
 
+.filter-box {
+  background-color: rgb(253, 249, 244);
+  border: 1px solid #dfe3e6;
+  border-radius: 2px;
+  width: 80%;
+  padding: 30px;
+  margin: 10px;
+}
+
+.launch-list {
+  background-color: rgb(253, 249, 244);
+  border: 1px solid #dfe3e6;
+  border-radius: 2px;
+
+  padding: 30px;
+  margin: 10px;
+}
+
 @media only screen and (min-width: 700px) {
   .main {
     background-color: #dfe3e6;
@@ -31,5 +49,15 @@
 
   .filter-box {
     width: auto;
+  }
+
+  .launch-list {
+    width: 45%;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .launch-list {
+    width: 22%;
   }
 }
